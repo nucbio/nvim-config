@@ -111,5 +111,15 @@ return {
           { name = 'path' },
         },
       }
+      -- Specific setup for markdown files (Obsidian)
+      cmp.setup.filetype("markdown", {
+        sources = {
+          { name = "obsidian" },
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+          { name = "path" },
+          { name = "buffer" },
+        },
+      })
     end,
 }

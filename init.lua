@@ -1,5 +1,6 @@
 require 'options'
 require 'keymaps'
+require 'workflow'
 
 -- Lazy plugin manager
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -28,7 +29,11 @@ require('lazy').setup({
     require 'plugins.which-key',
     require 'plugins.conform',
     require 'plugins.todo-comment',
-    require 'plugins.mini'
+    require 'plugins.mini',
+    require 'plugins.aerial',
+    require 'plugins.bookmarks',
+    require 'plugins.vimtex',
+    require 'plugins.obsidian'
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
@@ -71,3 +76,25 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- 
+
+return {
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      local lspconfig = require("lspconfig")
+
+      lspconfig.r_language_server.setup{
+        cmd = { "ssh", "mabo614c@login1.barnard.hpc.tu-dresden.de", "R", "--slave", "-e", "languageserver::run()" },
+        filetypes = { "r", "rmd" },
+        root_dir = lspconfig.util.root_pattern(".git", ".Rproj", ".Rprofile"),
+      }
+    end,
+  },
+}
+
+
+
+
+-- Use cnoreabbrev to expand lowercase 'st' into the Spte command
+--vim.cmd([[cnoreabbrev st Spte]])
