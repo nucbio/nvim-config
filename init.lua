@@ -76,25 +76,3 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- 
-
-return {
-  {
-    "neovim/nvim-lspconfig",
-    config = function()
-      local lspconfig = require("lspconfig")
-
-      lspconfig.r_language_server.setup{
-        cmd = { "ssh", "mabo614c@login1.barnard.hpc.tu-dresden.de", "R", "--slave", "-e", "languageserver::run()" },
-        filetypes = { "r", "rmd" },
-        root_dir = lspconfig.util.root_pattern(".git", ".Rproj", ".Rprofile"),
-      }
-    end,
-  },
-}
-
-
-
-
--- Use cnoreabbrev to expand lowercase 'st' into the Spte command
---vim.cmd([[cnoreabbrev st Spte]])
