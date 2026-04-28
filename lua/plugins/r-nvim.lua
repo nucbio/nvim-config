@@ -2,10 +2,9 @@
 return {
   'R-nvim/R.nvim',
   lazy = false,
-  version = '~0.1.0',
   config = function()
     local opts = {
-      external_term = false,
+      external_term = "",
       hook = {
         on_filetype = function()
           vim.api.nvim_buf_set_keymap(0, 'n', '<Enter>', '<Plug>RDSendLine', {})

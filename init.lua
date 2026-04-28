@@ -21,7 +21,6 @@ require('lazy').setup({
     require 'plugins.tmux_navigator',
     require 'plugins.telescope',
     require 'plugins.autocompletion',
-    require 'plugins.cmp-r',
     require 'plugins.comment',
     require 'plugins.delimitmate',
     require 'plugins.r-nvim',
