@@ -17,12 +17,7 @@ return {
     },
     config = function()
       require('telescope').setup {
-        defaults = {
-          -- Disable treesitter highlighting in previews to avoid the error
-          preview = {
-            treesitter = false,
-          },
-        },
+        defaults = {},
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),

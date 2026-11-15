@@ -25,7 +25,7 @@ Each file in `lua/plugins/` returns one lazy.nvim spec (a table or list of table
 ### Tool installation surfaces (read these before installing tools manually)
 
 - **LSP servers + standalone CLI tools** are installed by Mason via `lua/plugins/lsp.lua`. The `servers` table drives `mason-lspconfig`, and `mason-tool-installer` additionally installs anything appended to `ensure_installed` (currently `stylua`). Add new servers as keys of the `servers` table — they are auto-installed and auto-`setup`'d by the handler at the bottom of the file.
-- **Treesitter parsers** are listed in `lua/plugins/treesitter.lua` under `ensure_installed`. `auto_install = true` is also on, so opening an unknown filetype will fetch its parser.
+- **Treesitter parsers** are listed in `lua/plugins/treesitter.lua` in the `parsers` list (nvim-treesitter `main` branch, `require('nvim-treesitter').install`). A `FileType` autocmd there starts highlighting/indent and installs missing parsers on demand. Building parsers requires the `tree-sitter` CLI on `PATH`. Do not switch back to the `master` branch — it is incompatible with nvim >= 0.11 (breaks markdown/Rmd code-fence injections).
 - **Formatters** are configured per-filetype in `lua/plugins/conform.lua` (`formatters_by_ft`). `format_on_save` is enabled with `lsp_format = 'fallback'`, except for `c`/`cpp` which are explicitly disabled. `<leader>f` formats manually.
 
 ### R.nvim auto-start is environment-gated
