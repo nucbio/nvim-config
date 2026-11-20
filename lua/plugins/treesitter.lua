@@ -3,7 +3,7 @@
 local parsers = {
   "bash", "c", "cpp", "fortran", "python", "r", "rnoweb",
   "rust", "markdown", "markdown_inline", "csv",
-  "yaml", "diff", "html", "lua", "luadoc",
+  "yaml", "diff", "html", "lua", "luadoc", "groovy",
   "query", "vim", "vimdoc",
 }
 
@@ -15,6 +15,24 @@ return {
   config = function()
     local ts = require("nvim-treesitter")
     ts.install(parsers)
+
+    -- Nextflow / nf-core: no dedicated parser, the DSL is a Groovy superset
+    vim.filetype.add({
+      extension = { nf = "nextflow" },
+      filename = { ["nextflow.config"] = "nextflow" },
+      pattern = {
+        [".*%.nf%.test"] = "nextflow",
+        [".*/conf/.*%.config"] = "nextflow", -- nf-core conf/base.config, conf/modules.config, ...
+      },
+    })
+    vim.treesitter.language.register("groovy", "nextflow")
+    vim.api.nvim_create_autocmd("FileType", {
+      group = vim.api.nvim_create_augroup("user-nextflow", { clear = true }),
+      pattern = "nextflow",
+      callback = function(args)
+        vim.bo[args.buf].commentstring = "// %s"
+      end,
+    })
 
     -- Replaces the old `highlight`/`indent`/`auto_install` modules
     vim.api.nvim_create_autocmd("FileType", {
