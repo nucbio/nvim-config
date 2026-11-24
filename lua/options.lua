@@ -58,3 +58,6 @@ vim.opt.scrolloff = 10
 
 -- Need for Obsidian
 vim.opt.conceallevel = 2
+
+-- Highlight .def files (e.g. Apptainer definitions) as shell
+vim.filetype.add { extension = { def = 'sh' } }

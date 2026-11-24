@@ -12,7 +12,7 @@ local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<C-s>', '<cmd> w <CR>', opts)
 
 -- save file without auto-formatting
-vim.keymap.set('n', '<leader>sn', '<cmd>noautocmd w <CR>', opts)
+vim.keymap.set('n', '<leader>wn', '<cmd>noautocmd w <CR>', { noremap = true, silent = true, desc = 'Save without formatting' })
 
 -- quit file
 vim.keymap.set('n', '<C-q>', '<cmd> q <CR>', opts)
@@ -60,6 +60,9 @@ vim.keymap.set('n', '<leader>tp', ':tabp<CR>', opts) --  go to previous tab
 
 -- Toggle line wrapping
 vim.keymap.set('n', '<leader>lw', '<cmd>set wrap!<CR>', opts)
+
+-- Highlight current file as bash (for unrecognized files)
+vim.keymap.set('n', '<leader>lb', '<cmd>set filetype=sh<CR>', { noremap = true, silent = true, desc = 'Highlight file as bash' })
 
 -- Stay in indent mode
 vim.keymap.set('v', '<', '<gv', opts)
