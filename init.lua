@@ -76,3 +76,21 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+
+-- Over SSH (e.g. HPC): send yanks to the local PC clipboard via OSC 52.
+-- Paste reads the local register (OSC 52 read is blocked/slow in most terminals).
+-- Locally (no SSH_TTY) Neovim's built-in provider (wl-copy/xclip) is used.
+if vim.env.SSH_TTY then
+  local function copy(lines, _)
+    require('vim.ui.clipboard.osc52').copy('+')(lines)
+  end
+  local function paste()
+    return { vim.fn.split(vim.fn.getreg('"'), '\n'), vim.fn.getregtype('"') }
+  end
+  vim.g.clipboard = {
+    name = 'osc52',
+    copy = { ['+'] = copy, ['*'] = copy },
+    paste = { ['+'] = paste, ['*'] = paste },
+    cache_enabled = true,
+  }
+end
