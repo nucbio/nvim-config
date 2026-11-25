@@ -32,7 +32,8 @@ require('lazy').setup({
     require 'plugins.aerial',
     require 'plugins.bookmarks',
     require 'plugins.vimtex',
-    require 'plugins.obsidian'
+    require 'plugins.obsidian',
+    require 'plugins.gitsigns'
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
